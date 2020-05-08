@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .models import Model, Varient, Manufacturer
-from .serializers import ManufacturerSerializer, CarModelSerializer, VarientSerializer
+from .models import Model, Variant, Manufacturer
+from .serializers import ManufacturerSerializer, CarModelSerializer, VariantSerializer
 
 
 class ManufacturerViewSet(viewsets.ModelViewSet):
@@ -14,6 +14,6 @@ class ModelViewSet(viewsets.ModelViewSet):
     serializer_class = CarModelSerializer
 
 
-class VarientViewSet(viewsets.ModelViewSet):
-    queryset = Varient.objects.all()
-    serializer_class = VarientSerializer
+class VariantViewSet(viewsets.ModelViewSet):
+    queryset = Variant.objects.all()
+    serializer_class = VariantSerializer

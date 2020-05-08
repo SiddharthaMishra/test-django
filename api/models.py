@@ -3,18 +3,15 @@ from django.db import models
 
 class Manufacturer(models.Model):
     name = models.TextField(unique=True)
-    logo = models.ImageField(null=True)
-    url = models.URLField()
+    logo = models.ImageField(upload_to='manufacturer', default="/media/manufacturer/default.png")
+    url = models.TextField()
 
 class Model(models.Model):
     name = models.TextField(unique=True)
     manufacturer = models.ForeignKey(Manufacturer, related_name='models', on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='variant', default='/media/variant/default.png')
 
-class Varient(models.Model):
+class Variant(models.Model):
     name = models.TextField(unique=True)
-    picture = models.ImageField(null=True)
-    model = models.ForeignKey(Model, related_name='varients', on_delete=models.CASCADE)
-
-    # dimensions in inches 
-    width = models.FloatField()
-    height = models.FloatField() 
+    model = models.ForeignKey(Model, related_name='variants', on_delete=models.CASCADE)
+    price = models.FloatField()

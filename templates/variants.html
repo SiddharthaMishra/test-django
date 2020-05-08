@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {{ model.name }}
+    </title>
+    <script src="{% static "index.js" %}"> </script>
+</head>
+<body>
+    <h1> {{ model.name }} </h1>
+    <ul>
+    {% for variant in model.variants.all %}
+    <li>
+        <h4>{{ variant.name }}</h4>
+        price: {{ variant.price }}
+        <button onclick="deleteObject('{% url "api:variant-detail" pk=variant.pk%}')"> delete </button>
+
+    </li>
+    {% endfor %}
+    </ul>
+
+    <br><br>
+    <h2> Add new variant! </h2>
+    <form action="{% url 'model-detail' pk=model.pk%}" method="POST">
+    {% csrf_token %}
+    Name: <input type="text" name="name">
+    Price: <input type="number" name="price">
+    <input type="text" name="model" value="{{ model.pk }}" style="display:none">
+    <input type="submit">
+    </form>
+</body>
+
+</html>

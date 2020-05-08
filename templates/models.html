@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        gaadi
+    </title>
+    <script src="{% static "index.js"%}"></script>
+</head>
+<body>
+    <h1> {{ manufacturer.name }} </h1>
+    <ul>
+    {% for model in manufacturer.models.all %}
+    <li>
+        <img src="{% get_media_prefix %}{{ model.picture }}">
+        <a href="{% url "model-detail" pk=model.pk  %}"><h3>{{ model.name }}</h3></a>
+        
+    <button onclick="deleteObject('{% url "model-detail" pk=model.pk%}')"> delete </button>
+    </li>
+    {% endfor %}
+    </ul>
+
+    <br><br>
+    <h1> Add new models </h1>
+    <form action="{% url 'manufacturer-detail' pk=manufacturer.pk%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    Name: <input type="text", name="name"> <br>
+    Picture <input type="file" name="picture">
+    <input type="text" name="manufacturer" value="{{ manufacturer.pk }}" style="display:none">
+    <input type="submit">
+    </form>
+</body>
+
+</html>

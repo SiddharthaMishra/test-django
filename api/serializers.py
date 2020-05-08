@@ -1,4 +1,4 @@
-from .models import Manufacturer, Varient, Model
+from .models import Manufacturer, Variant, Model
 from rest_framework import serializers
 
 
@@ -13,11 +13,11 @@ class ManufacturerSerializer(serializers.ModelSerializer):
 class CarModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Model
-        fields = ['name', 'manufacturer']
+        fields = ['name', 'manufacturer', "picture"]
 
-class VarientSerializer(serializers.ModelSerializer):
+class VariantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Varient
-        fields = ['name', 'picture', 'model', 'width', 'height']
+        model = Variant
+        fields = ['name', 'model', 'price']
 
     
